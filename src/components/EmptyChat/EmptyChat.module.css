@@ -1,0 +1,11 @@
+#emptychat {
+  flex : 1;
+  grid-row: 1 / 7;
+  grid-column: 1 / 4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#emptychat h1 {
+  color: rgb(26, 26, 26)
+}

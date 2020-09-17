@@ -1,0 +1,86 @@
+.editor_wrapper {
+  width : 80%;
+  min-height: 65px;
+  height : 100%;
+  position: static;
+  overflow-y : auto;
+  border-style: solid;
+  border-radius: 5px 5px 0 0 ;
+  border-color : grey;
+  border-width : 2px 2px 1px 2px;
+  grid-column : 2;
+  grid-row : 3;
+  margin : 6px 15px 0 20px;
+}
+
+.editor_control {
+  grid-column : 2;
+  grid-row : 2;
+  width : 80%;
+  height: 34px;
+  border-style: solid;
+  border-radius: 0 0 5px 5px;
+  border-width : 0px 2px 2px 2px;
+  border-color : grey;
+  margin : 0 15px 10px 20px;
+  display : grid;
+  grid-template-columns: 1fr 110px;
+}
+.button_wrapper {
+  grid-column : 1;
+  display: flex;
+  margin-left: 10px;
+}
+
+.button{
+  margin: 7px 8px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.button:hover{
+  color: rgb(50, 128, 211);
+}
+
+.submit {
+  grid-column : 2;
+  margin: 3px 8px;
+  text-align: center;
+  font-weight: 600;
+  display: flex;
+  align-content: space-between;
+}
+
+.submit div,i{
+  flex : 1;
+  padding: 3px 0 ;
+}
+
+.submit i{
+  padding: 6px 0 ;
+}
+
+.submit div:hover{
+  background-color: rgb(245, 245, 245);
+}
+.submit i:hover{
+  background-color: rgb(245, 245, 245);
+}
+
+
+
+blockquote {
+  background-color : grey;
+  margin : 0 0 5px 0;
+}
+/* ------------스크롤바--------------- */
+::-webkit-scrollbar { width: 10px; }
+/* 스크롤바의 width */
+::-webkit-scrollbar-track { background-color: #f0f0f0; }
+/* 스크롤바의 전체 배경색 */
+::-webkit-scrollbar-thumb { 
+    background:#9ba3a2
+}
+/* 스크롤바 색 */
+::-webkit-scrollbar-button { display: none; }
+/* 위 아래 버튼 (버튼 없애기를 함) */

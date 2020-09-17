@@ -1,0 +1,12 @@
+.public-DraftEditor-content {
+  position: relative;
+  height: 62px;
+}
+/* 여기까지가 타자 한줄한줄 이전부분 */
+
+/* 블록타입은 div태그자체를 다른것으로 바꿈 */
+.public-DraftStyleDefault-block {
+}
+/* ltr타입은스타일로 span을 바꿈 */
+.public-DraftStyleDefault-ltr {
+}

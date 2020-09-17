@@ -1,0 +1,6 @@
+.check_hidden {
+  color: red;
+  font-size: 12px;
+  position: relative;
+  top : -10px;
+}
