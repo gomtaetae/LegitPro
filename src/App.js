@@ -8,7 +8,7 @@ import Namespaces from './components/Namespaces/Namespaces';
 import UserModify from './components/UserModify/UserModify';
 import Invalid from './components/Invalid/Invalid';
 import Valid from './components/Valid/Valid';
-import Auth from "./hoc/auth"
+import Auth from "./hoc/auth";
 function App() {
   return (
     <Router>
@@ -20,7 +20,7 @@ function App() {
         <Route exact path="/usermodify" component={Auth(UserModify, true)}/>          
         <Route exact path="/valid/:id" component={Auth(Valid,true)} />
         <Route exact path="/invalid" component={Auth(Invalid,true)}/>
-      </Switch>
+        </Switch>
     </Router>
   );
 }
