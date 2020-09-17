@@ -18,9 +18,9 @@ router.post('/register', (req, res) => {
 
 router.post("/login", (req, res) => {
   User.findOne({ email: req.body.email }, function (err, user) {
-    if (!user) return res.json({ loginSuccess: false, message: "이메일에 해당하는 유저가 없습니다" });
+    if (!user) return res.json({ loginSuccess: false, message: "이메일에 해당하는 유저가 없습니다", check:false });
     user.comparePassword(req.body.password, (err, isMatch) => {
-      if (!isMatch) return res.json({ loginSuccess: false, message: "비밀번호가 일치하지 않습니다" });
+      if (!isMatch) return res.json({ loginSuccess: false, message: "비밀번호가 일치하지 않습니다", check:true });
       user.generateToken((err, user) => {
         let {_id, name, image, role, email, token} = user
         res.cookie("x_auth", token).status(200)

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './LoginPage.css'
+import styles from './LoginPage.module.css';
 import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react'
 import { useDispatch } from "react-redux"
 import {loginUser} from '../../_actions/user_action'
@@ -14,7 +14,8 @@ const LoginPage = (props) => {
 
   const [ Email, setEmail ] = useState("");
   const [ Password, setPassword ] = useState("");
-  const [ Hidden, setHidden ] = useState(true);
+  const [ chkEmail, setChkEmail ] = useState(true);
+  const [ chkPwd, setChkPwd ] = useState(true);
 
   function onEmailHandler(event) {
     setEmail(event.target.value)
@@ -33,7 +34,12 @@ const LoginPage = (props) => {
       if(response.payload.loginSuccess){
         props.history.push('/')
       }else{
-        setHidden(false);
+        if(!response.payload.check){
+          setChkEmail(false);
+        }else{
+          setChkEmail(true);
+          setChkPwd(false);
+        }
       }
     }) 
   }
@@ -88,6 +94,7 @@ const LoginPage = (props) => {
       <Form size='large' onSubmit={onSubmitHandler}>
         <Segment stacked>
           <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address' value={Email} onChange={onEmailHandler}/>
+          {!chkEmail && <span className={styles.check_hidden}>이메일을 확인해주세요</span>}
           <Form.Input
             fluid
             icon='lock'
@@ -97,7 +104,8 @@ const LoginPage = (props) => {
             value={Password} 
             onChange={onPasswordHandler}
           />
-
+          {!chkPwd && <span className={styles.check_hidden}>비밀번호를 확인해주세요</span>}
+          
           <Button color='blue' fluid size='large'>
             Login
           </Button>

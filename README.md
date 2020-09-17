@@ -1,3 +1,4 @@
+** .env에서 Mongodb UI 수정, IP_ADDRESS REACT_APP_IP_ADDRESS 본인 IP로 수정해야 정상실행
 ## 기본 채팅기능 완료
 ### 참고
 

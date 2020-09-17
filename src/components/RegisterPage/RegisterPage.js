@@ -18,10 +18,12 @@ const RegisterPage = (props) => {
   const [ Confirm, setConfirm ] = useState("");
 
   //hidden input마다 분리
-  const [ HdEmail, setHdEmail] = useState(true);
-  const [ HdName, setHdName] = useState(true);
-  const [ HdPwd, setHdPwd] = useState(true);
-  const [ HdMatch, setHdMatch] = useState(true);
+  const [ HdEmail, setHdEmail ] = useState(true);
+  const [ okEmail, setOkEmail ] = useState(true);
+  const [ HdName, setHdName ] = useState(true);
+  const [ HdPwd, setHdPwd ] = useState(true);
+  const [ HdMatch, setHdMatch ] = useState(true);
+
 
   function onEmailHandler(event) {
     setEmail(event.target.value)
@@ -38,7 +40,7 @@ const RegisterPage = (props) => {
 
   //유효성검사
   function chkEmail(){
-    let isEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+    let isEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
     return isEmail.test(Email) ? true : false
   }
   function chkName() {
@@ -58,27 +60,26 @@ const RegisterPage = (props) => {
     let body = {email : Email, name : Name, password : Password }
     
     //hidden 조건
-      let email = chkEmail()
-      let name = chkName() 
-      let pwd = chkPwd()
-      let confirmation = matchPwd()
+    let email = chkEmail()
+    let name = chkName() 
+    let pwd = chkPwd()
+    let confirmation = matchPwd()
 
-      if (!email || !name || !pwd || !confirmation) {
-        if (email) setHdEmail(true)
-        else setHdEmail(false)
-        
-        if (name) setHdName(true)
-        else setHdName(false)
+    if (!email || !name || !pwd || !confirmation) {
+      if (email) setHdEmail(true)
+      else setHdEmail(false)
+      
+      if (name) setHdName(true)
+      else setHdName(false)
 
-        if (pwd) setHdPwd(true)
-        else setHdPwd(false)
-        
-        if (confirmation) setHdMatch(true)
-        else setHdMatch(false)
-        
-        return;
-      }
-      console.log("wpkqf",email);
+      if (pwd) setHdPwd(true)
+      else setHdPwd(false)
+      
+      if (confirmation) setHdMatch(true)
+      else setHdMatch(false)
+      
+      return;
+    }
 
     dispatch(registerUser(body))
     .then(response=>{
@@ -89,6 +90,10 @@ const RegisterPage = (props) => {
             props.history.replace("/invalid");
           } 
         });
+      } else if(!response.payload.success){
+        setOkEmail(false);
+        setHdPwd(true);
+        setHdMatch(true);
       }
     })
   }
@@ -154,8 +159,9 @@ const RegisterPage = (props) => {
     </Header>
     <Form size='large' onSubmit={onSubmitHandler}>
       <Segment stacked>
-      <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address' value={Email} onChange={onEmailHandler}/>
+        <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address' value={Email} onChange={onEmailHandler}/>
         {!HdEmail && <span className={styles.check_hidden}>이메일 형식이 유효하지 않습니다.</span>}
+        {!okEmail && <span className={styles.check_hidden}>이미 사용중인 아이디입니다.</span>}
         <Form.Input fluid icon='user' iconPosition='left' placeholder='Name' value={Name} onChange={onNameHandler}/>
         {!HdName && <span className={styles.check_hidden}>이름은 한글,영문 대소문자 2~15자리만 사용 가능합니다.</span>}
         <Form.Input fluid icon='lock' iconPosition='left' placeholder='Password' type='password' value={Password} onChange={onPasswordHandler}/>
